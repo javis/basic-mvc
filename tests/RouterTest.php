@@ -47,7 +47,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $router->add(['get'],'/index',$callback);
         $this->assertEquals([$callback, []], $router->route('get','index'));
         // test one argument with custom regexp pattern
-        $router->add(['get'],'books/{id:\d+}',$callback);
+        $router->add(['get'],'books/{id:\d*}',$callback);
         $this->assertEquals([$callback, ['id'=>'2']], $router->route('get','/books/2/'));
         // test multiple arguments
         $router->add(['get', 'post'],'{controller}/{action}/{id}',$callback);

@@ -1,0 +1,33 @@
+    <h1>Books list</h1>
+    <nav class="navbar navbar-light bg-light justify-content-between">
+      <form class="form-inline" method="get" action="/">
+        <input class="form-control mr-sm-2" type="search" name="search" value="<?=$search??''?>" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <a href="books/add" class="btn btn-primary">Add Book</a>
+    </nav>
+    <p class="important">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Author</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <? foreach ($books as $book): ?>
+            <tr>
+              <th scope="row">1</th>
+              <td><?=$book['title']?></td>
+              <td><?=$book_author['full_name']?></td>
+              <td>
+                  <a href="books/<?=$book['id']?>" class="btn btn-secondary" >Edit</a>
+                  <a onclick="return confirm('Are you sure?');" href="books/<?=$book['id']?>/delete" class="btn btn-danger" rel="nofollow" >Delete</a>
+              </td>
+            </tr>
+            <? endforeach; ?>
+          </tbody>
+        </table>
+    </p>

@@ -21,4 +21,10 @@ value with a registered route and return its callback. Getting which value is go
 - The router accepts any kind of callable argument as callback
 - The router accepts a path as string and converts it to a regexp pattern to test routes
 - It supports arguments in the registered routes with the form /user/{id} and even supports params with
-custom patterns as /user/id:\\d+ 
+custom patterns as /user/id:\\d+
+
+## Controllers
+
+- Since the router can receive any 'callable' as routes callbacks, there isn't really any need to come up
+with anything fancy.
+- To avoid creating objects unnecessarily, I've created my Controllers as static classes (so they fulfill their callable condition). If I had more time I would have probably come up with a mechanism to instantiate controllers dynamically to avoid static classes.

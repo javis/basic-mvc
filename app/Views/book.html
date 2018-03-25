@@ -1,0 +1,31 @@
+    <h1>Create Book</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="title">Book Title</label>
+            <input value="<?=$book['title']??''?>" required type="text" class="form-control" name="title" id="title" aria-describedby="titleHelp" placeholder="Enter title">
+            <small id="titleHelp" class="form-text text-muted">Enter the name of the book.</small>
+        </div>
+        <div class="form-group">
+            <label for="description">Book Description</label>
+            <textarea class="form-control" name="description" id="description" rows="3" aria-describedby="descriptionHelp"><?=$book['description']??''?></textarea>
+            <small id="descriptionHelp" class="form-text text-muted">Enter a brief description of the book content.</small>
+        </div>
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input value="<?=$book_author['full_name']" required type="text" class="typeahead form-control" name="author" id="author" aria-describedby="authorHelp" placeholder="Enter the author">
+            <small id="authorHelp" class="form-text text-muted">Enter the full name of the book author.</small>
+        </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+      <a onclick="return confirm('All the changes will be lost');" href="/" class="btn btn-danger" rel="nofollow" >Cancel</a>
+    </form>
+    <!-- Bootstrap Typeahead Plugin -->
+    <script src="/js/bootstrap3-typeahead.js"></script>
+    <script>
+    $(function(){
+        $.get("/authors.json",function(data){
+          $(".typeahead").typeahead({
+            source:data
+          });
+        },'json');
+    })
+    </script>
