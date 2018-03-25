@@ -32,4 +32,11 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
             'param2'=> 'Wrong',
         ]), "Test");
     }
+
+    public function testSupportOptionalArgs()
+    {
+        $this->assertEquals(call_user_func_array([TestController::class,'test2'],[
+            'param1'=>'Test'
+        ]), "Test");
+    }
 }
