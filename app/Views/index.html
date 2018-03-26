@@ -21,7 +21,7 @@
             <tr>
               <th scope="row">1</th>
               <td><?=$book['title']?></td>
-              <td><?=$book_author['full_name']?></td>
+              <td><?=$book['full_name']?></td>
               <td>
                   <a href="books/<?=$book['id']?>" class="btn btn-secondary" >Edit</a>
                   <a onclick="return confirm('Are you sure?');" href="books/<?=$book['id']?>/delete" class="btn btn-danger" rel="nofollow" >Delete</a>

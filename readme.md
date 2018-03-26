@@ -28,3 +28,7 @@ custom patterns as /user/id:\\d+
 - Since the router can receive any 'callable' as routes callbacks, there isn't really any need to come up
 with anything fancy.
 - To avoid creating objects unnecessarily, I've created my Controllers as static classes (so they fulfill their callable condition). If I had more time I would have probably come up with a mechanism to instantiate controllers dynamically to avoid static classes.
+
+## Models
+
+- Likewise, I didn't have enough time to do something fancy with them either. I would have liked to make an auto SQL generator on the base class, but I ended up writing the queries in the models by hand.

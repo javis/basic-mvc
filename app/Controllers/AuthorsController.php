@@ -5,7 +5,12 @@ use App\Models\Author;
 class AuthorsController extends BaseController{
     public static function index()
     {
-        $authors = Author::where('id','>', 0)->lists('full_name');
-        return json_encode($authors);
+        $authors = new Author();
+        $authors = $authors->getAll();
+        $authors = array_map(function($author){
+            return $author['full_name'];
+        },$authors);
+
+        die(json_encode($authors));
     }
 }

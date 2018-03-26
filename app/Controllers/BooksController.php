@@ -24,12 +24,14 @@ class BooksController extends BaseController{
 
     public static function delete($id)
     {
-        //$item = Book::findOrFail($id);
-        //$item->delete();
-
-        // show success message
-        self::flash('Book removed successfully');
-
+        $books = new Book();
+        if ($books->delete($id)){
+            self::flash('Book removed successfully');
+        }
+        else
+        {
+            self::flash("No book was found with id $id" , "error");
+        }
         // redirects to listing
         header("Location: /");
         die();
@@ -42,20 +44,42 @@ class BooksController extends BaseController{
 
     public static function view($id)
     {
-        $book = Book::with('author')->findOrFail($id);
+        $books = new Book();
+        $authors = new Author();
+        $book = $books->get($id);
+        if (!$book){
+            header('HTTP/1.0 404 Not Found', true, 404);
+            die("Not Found");
+        }
+        $book_author = $authors->get($book['author_id']);
         self::render('book.html',[
-            'book' => $book
+            'book' => $book,
+            'book_author' => $book_author
         ]);
     }
 
     public static function store($id=null)
     {
-        $book = Book::findOrNew($id);
-        $book->title = $_POST['title'];
-        $book->description = $_POST['description'];
-        $book->author()->associate(Author::firstOrCreate(['full_name'=>$_POST['author']]));
-        $book->save();
+        $books = new Book();
+        $authors = new Author();
 
+        // get the id of the author or creates it
+        $author = $authors->getByFullName($_POST['author']);
+        if ($author){
+            $author_id = $author['id'];
+        }
+        else{
+            $author_id = $authors->insert($_POST['author']);
+        }
+        // insert book or updates it
+
+        if (!$id){
+            $id = $books->insert($_POST['title'], $_POST['description'], $author_id);
+        }
+        else
+        {
+            $updated = $books->update($id,$_POST['title'], $_POST['description'], $author_id);
+        }
 
         self::flash($id?'Book saved successfully':'Book created successfully','success');
 
