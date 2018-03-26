@@ -3,16 +3,18 @@ namespace App\Controllers;
 use App\Models\{Book,Author};
 
 class BooksController extends BaseController{
-    public function index()
+    public static function index()
     {
         $search = filter_input(INPUT_GET, 'search', FILTER_DEFAULT);
         // retrieves the books
-        $books = [];
+        $books = new Book();
 
         if ($search){
-            //$books->where('title', 'like', "%{$search}%");
+            $books = $books->titleLike($search);
         }
-
+        else{
+            $books = $books->getAll();
+        }
         // render the template
         self::render('index.html',[
             'books' => $books,
@@ -20,7 +22,7 @@ class BooksController extends BaseController{
         ]);
     }
 
-    public function delete($id)
+    public static function delete($id)
     {
         //$item = Book::findOrFail($id);
         //$item->delete();
@@ -33,12 +35,12 @@ class BooksController extends BaseController{
         die();
     }
 
-    public function create()
+    public static function create()
     {
         self::render('book.html');
     }
 
-    public function view($id)
+    public static function view($id)
     {
         $book = Book::with('author')->findOrFail($id);
         self::render('book.html',[
@@ -46,7 +48,7 @@ class BooksController extends BaseController{
         ]);
     }
 
-    public function store($id=null)
+    public static function store($id=null)
     {
         $book = Book::findOrNew($id);
         $book->title = $_POST['title'];

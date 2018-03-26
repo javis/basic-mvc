@@ -7,9 +7,12 @@
           "App\\": "app/",
           "Core\\": "core/",
           "Test\\": "tests/"
-      },
-      "files": [
+        },
+        "classmap": [
+            { "App\\Config": "config/Config.php" }
+        ],
+        "files": [
            "app/bootstrap.php"
-       ]
+        ]
     }
 }

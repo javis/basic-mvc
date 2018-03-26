@@ -2,7 +2,7 @@
 
 namespace Core\MVC;
 
-use PDO;
+use \PDO;
 use App\Config;
 
 /**
@@ -16,7 +16,7 @@ abstract class BaseModel
      *
      * @return mixed
      */
-    protected static function getDB()
+    protected function getDB()
     {
         static $db = null;
 

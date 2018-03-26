@@ -17,7 +17,7 @@
             </tr>
           </thead>
           <tbody>
-            <? foreach ($books as $book): ?>
+            <?php foreach ($books as $book): ?>
             <tr>
               <th scope="row">1</th>
               <td><?=$book['title']?></td>
@@ -27,7 +27,7 @@
                   <a onclick="return confirm('Are you sure?');" href="books/<?=$book['id']?>/delete" class="btn btn-danger" rel="nofollow" >Delete</a>
               </td>
             </tr>
-            <? endforeach; ?>
+            <?php endforeach; ?>
           </tbody>
         </table>
     </p>

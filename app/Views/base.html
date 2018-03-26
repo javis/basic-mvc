@@ -12,11 +12,13 @@
     </head>
     <body>
         <div class="container">
-            <? if (isset($flash)): ?>
-            <div>
-                <?=$flash?>
+
+            <?php foreach($flash as $f): ?>
+            <div class="alert alert-<?=$f['type']?>" role="alert">
+              <?=$f['message']?>
             </div>
-            <? endif; ?>
+            <?php endforeach; ?>
+
             <div>
                 <?=$content?>
             </div>

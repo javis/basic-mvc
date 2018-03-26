@@ -3,6 +3,9 @@
 * App single point entry
 */
 use Core\Router;
+
+session_start();
+
 // include composer autoload and Framework bootstrap
 require_once '../vendor/autoload.php';
 
